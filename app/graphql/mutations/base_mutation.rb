@@ -1,5 +1,3 @@
-module Mutations
-  class BaseMutation < GraphQL::Schema::RelayClassicMutation
+  class Mutations::BaseMutation < GraphQL::Schema::RelayClassicMutation
 
   end
-end
