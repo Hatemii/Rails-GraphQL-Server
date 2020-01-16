@@ -1,5 +1,7 @@
 class Mutations::UpdateGames < Mutations::BaseMutation
 
+
+  argument :id, Integer, required: false
   argument :name, String, required: false
   argument :genre, String, required: false
   argument :platform, String, required: false
@@ -7,14 +9,11 @@ class Mutations::UpdateGames < Mutations::BaseMutation
   field :game, Types::GameType, null: false
   field :errors, [String], null: false
 
-  def resolve(name:,genre:,platform:)
-    game = Game.first
-    game.name = name
-    game.genre = genre
-    game.platform = platform
+    def resolve(id:,name:)
+      game = Game.find_by!(id: id)
+      game.name=name
+      game.save
+      {game: game}
+    end
 
-    game.save
-    {game: game}
-
-  end
 end

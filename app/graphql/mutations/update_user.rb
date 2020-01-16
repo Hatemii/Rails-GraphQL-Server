@@ -7,10 +7,9 @@ class Mutations::UpdateUser < Mutations::BaseMutation
       field :user, Types::UserType, null: false
       field :errors, [String], null: false
 
-        def resolve(name:,email:)
-          user = User.first
+        def resolve(id:,name:)
+          user = User.find_by!(id: id)
           user.name=name
-          user.email=email
           user.save
           {user: user}
         end
