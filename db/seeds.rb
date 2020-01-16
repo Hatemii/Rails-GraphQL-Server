@@ -5,4 +5,13 @@
     user.posts.create!(title: Faker::Lorem.sentence(word_count:3),
     body: Faker::Lorem::paragraph(sentence_count: 3))
   end
+
+
+  10.times do
+    Game.create!({
+      name: Faker::Game.name,
+      genre: Faker::Game.genre,
+      platform: Faker::Game.platform
+    })
+  end
 end

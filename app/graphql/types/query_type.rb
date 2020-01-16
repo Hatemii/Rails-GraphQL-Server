@@ -9,12 +9,26 @@ module Types
  end
 
  # /user/:id
- field :user, Types::UserType, null: false do
-   argument :id, ID, required: true
+ field :user, Types::UserType, null: true do
+   argument :id, ID, required: false
+   argument :name, String, required: false
  end
 
- def user(id:)
-   User.find(id)
- end
+ def user(id:nil, name:nil)
+   if(name)
+     User.where(name)
+   else
+      User.find(id)
+   end
+end
+
+##########################################################
+
+field :games, [Types::GameType], null: false
+
+  def games
+    Game.all
+  end
+
 end
 end

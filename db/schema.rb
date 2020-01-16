@@ -1,5 +1,13 @@
 
-ActiveRecord::Schema.define(version: 2020_01_15_143312) do
+ActiveRecord::Schema.define(version: 2020_01_16_104156) do
+
+  create_table "games", force: :cascade do |t|
+    t.string "name"
+    t.string "genre"
+    t.string "platform"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -18,5 +26,4 @@ ActiveRecord::Schema.define(version: 2020_01_15_143312) do
   end
 
   add_foreign_key "posts", "users"
-
 end
