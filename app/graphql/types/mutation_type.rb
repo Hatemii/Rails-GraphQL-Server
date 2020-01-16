@@ -5,8 +5,7 @@ module Types
     field :create_games, mutation: Mutations::CreateGames
 
     field :update_user, mutation: Mutations::UpdateUser
-
-
+    field :update_games, mutation: Mutations::UpdateGames
 
   end
 end
