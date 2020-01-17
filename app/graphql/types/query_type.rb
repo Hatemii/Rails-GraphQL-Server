@@ -46,15 +46,10 @@ field :games, [Types::GameType], null: false
 
     field :book, Types::BookType, null: true do
       argument :id, ID, required: false
-      argument :author, String, required: false
     end
 
-    def book (id:nil,author:nil)
-      if(author)
-        Book.where(author=author)
-      else
-        Book.find(id)
-      end
+    def book(id:nil)
+      Book.find(id)
     end
 
 
