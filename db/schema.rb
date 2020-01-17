@@ -1,5 +1,13 @@
 
-ActiveRecord::Schema.define(version: 2020_01_16_104156) do
+ActiveRecord::Schema.define(version: 2020_01_17_123702) do
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.string "author"
+    t.string "genre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.string "name"
@@ -25,4 +33,5 @@ ActiveRecord::Schema.define(version: 2020_01_16_104156) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "posts", "users"
 end
