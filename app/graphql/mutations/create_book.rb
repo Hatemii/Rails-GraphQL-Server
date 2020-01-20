@@ -1,3 +1,5 @@
+
+
 class Mutations::CreateBook < Mutations::BaseMutation
 
   argument :author, String, required: true
@@ -13,7 +15,7 @@ class Mutations::CreateBook < Mutations::BaseMutation
       book: book,
       errors: []
     }
-  else
+    else
     {
       book: nil,
       errors: book.errors.full_messages

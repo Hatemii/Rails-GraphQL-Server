@@ -1,6 +1,10 @@
-class UpdateBook < Mutations::BaseMutation
+class Mutations::UpdateBook < Mutations::BaseMutation
 
-  argument :attributes, InputTypes::BookInputType, required: true
+  argument :id, ID, required: true
+  argument :author, String, required: false
+  argument :title, String, required: false
+  argument :genre, String, required: false
+
 
   def resolve(id:,author:nil,title:nil,genre:nil)
      book = Book.find(id)

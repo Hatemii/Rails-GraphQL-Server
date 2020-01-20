@@ -1,3 +1,5 @@
+
+
 class Mutations::CreateUser < Mutations::BaseMutation
 
   argument :name, String, required: true

@@ -1,10 +1,14 @@
+
+
 class Mutations::CreateGames < Mutations::BaseMutation
 
-  argument :name, String, required: true
+  argument :name,String, required: true
   argument :genre, String, required: true
+  argument :platform, String, required: true
 
-  def resolve(name:, genre:)
-    game = Game.new(name: name, genre:genre)
+
+  def resolve(name:, genre:,platform:)
+    game = Game.new(name: name, genre:genre, platform: platform)
     if game.save
       {
         game: game,

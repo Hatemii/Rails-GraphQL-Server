@@ -1,3 +1,4 @@
+
 class Mutations::DeleteUser < Mutations::BaseMutation
 
   argument :id, Integer, required: false

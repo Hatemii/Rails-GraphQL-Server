@@ -1,3 +1,5 @@
+
+
 class Mutations::DeleteBook < Mutations::BaseMutation
 
   argument :id, Integer, required: false

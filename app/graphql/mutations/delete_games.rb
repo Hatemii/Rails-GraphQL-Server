@@ -1,3 +1,6 @@
+
+
+
 class Mutations::DeleteGames < Mutations::BaseMutation
 
   argument :id, Integer, required: false

@@ -1,6 +1,7 @@
-class UpdateUser < Mutations::BaseMutation
 
-      argument :attributes, InputTypes::UserInputType, required: true
+class Mutations::UpdateUser < Mutations::BaseMutation
+
+  argument :attributes, InputTypes::UserInputType, required: true
 
       def resolve(attributes:)
          user = User.find(id)

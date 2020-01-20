@@ -1,10 +1,13 @@
-class UpdateGames < Mutations::BaseMutation
+
+class Mutations::UpdateGames < Mutations::BaseMutation
 
 
-  argument :attributes, InputTypes::GameInputType, required: true
+  argument :name,String, required: true
+  argument :genre, String, required: true
+  argument :platform, String, required: true
 
 
-    def resolve(attributes:)
+    def resolve(name:,genre:,platform:)
       game = Game.find(id)
 
       if name
