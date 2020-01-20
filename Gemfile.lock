@@ -59,7 +59,7 @@ GEM
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.4)
-    byebug (11.0.1)
+    byebug (11.1.0)
     concurrent-ruby (1.1.5)
     crass (1.0.6)
     erubi (1.9.0)
@@ -71,7 +71,7 @@ GEM
     graphiql-rails (1.7.0)
       railties
       sprockets-rails
-    graphql (1.9.17)
+    graphql (1.9.18)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     listen (3.1.5)

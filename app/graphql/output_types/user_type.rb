@@ -1,5 +1,5 @@
-module Types
-  class UserType < Types::BaseObject
+module OutputTypes
+  class UserType < OutputTypes::BaseObject
 
      field :id, ID, null: false
      field :name, String, null: true

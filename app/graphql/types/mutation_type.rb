@@ -2,19 +2,19 @@ module Types
   class MutationType < Types::BaseObject
 
 
-    field :create_user, mutation: Mutations::CreateUser
-    field :create_games, mutation: Mutations::CreateGames
-    field :create_book, mutation: Mutations::CreateBook
+    field :create_user, OutputTypes::UserType, mutation: Mutations::CreateUser
+    field :create_games,OutputTypes::GameType, mutation: Mutations::CreateGames
+    field :create_book, OutputTypes::BookType, mutation: Mutations::CreateBook
 
 
-    field :update_user, mutation: Mutations::UpdateUser
-    field :update_games, mutation: Mutations::UpdateGames
-    field :update_book, mutation: Mutations::UpdateBook
+    field :update_user, OutputTypes::UserType, mutation: Mutations::UpdateUser
+    field :update_games,OutputTypes::GameType, mutation: Mutations::UpdateGames
+    field :update_book, OutputTypes::BookType, mutation: Mutations::UpdateBook
 
 
-    field :delete_user, mutation: Mutations::DeleteUser
-    field :delete_games, mutation: Mutations::DeleteGames
-    field :delete_book, mutation: Mutations::DeleteBook
+    field :delete_user, OutputTypes::UserType, mutation: Mutations::DeleteUser
+    field :delete_games,OutputTypes::GameType, mutation: Mutations::DeleteGames
+    field :delete_book, OutputTypes::BookType,  mutation: Mutations::DeleteBook
 
 
 
