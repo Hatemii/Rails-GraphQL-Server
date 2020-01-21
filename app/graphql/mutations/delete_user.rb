@@ -1,14 +1,16 @@
 
 class Mutations::DeleteUser < Mutations::BaseMutation
 
-  argument :id, Integer, required: false
-  argument :name, String, required: false
-  argument :email, String, required: false
+  argument :attributes, InputTypes::UserInputType, required: true
 
 
-  def resolve(id:)
-    user = User.find_by!(id: id)
-    user.destroy
-    {user: user}
+  def resolve(attributes:)
+
+     user = User.find(attributes[:id])
+
+     user.destroy
+     user.save
+     user
+
   end
 end

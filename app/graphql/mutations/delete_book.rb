@@ -2,17 +2,16 @@
 
 class Mutations::DeleteBook < Mutations::BaseMutation
 
-  argument :id, Integer, required: false
-  argument :author, String, required: false
-  argument :title, String, required: false
-  argument :genre, String, required: false
+  argument :attributes, InputTypes::BookInputType, required: true
 
 
-  def resolve(id:)
-    book = Book.find_by(id:id)
-    book.destroy
-    ajsd
-    {book: book}
+  def resolve(attributes:)
+
+     book = Book.find(attributes[:id])
+
+     book.destroy
+     book.save
+     book
+
   end
-
 end
