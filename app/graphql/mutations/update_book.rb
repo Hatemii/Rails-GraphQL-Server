@@ -1,22 +1,20 @@
+
 class Mutations::UpdateBook < Mutations::BaseMutation
 
-  argument :id, ID, required: true
-  argument :author, String, required: false
-  argument :title, String, required: false
-  argument :genre, String, required: false
+  argument :attributes, InputTypes::BookInputType, required: true
 
+  def resolve(attributes:)
+    book = Book.find(attributes[:id])
+    if attributes[:title]
+      book.title = attributes[:title]
+    elsif attributes[:genre]
+      game.genre = attributes[:genre]
+    else attributes[:author]
+      book.author = attributes[:author]
+    end
 
-  def resolve(id:,author:nil,title:nil,genre:nil)
-     book = Book.find(id)
-     if author
-       book.author = author
-     elsif title
-       book.title = title
-     else genre
-       book.genre = genre
-     end
-
-   book.save
-   {book: book}
+    book.save!
+    book
   end
+
 end

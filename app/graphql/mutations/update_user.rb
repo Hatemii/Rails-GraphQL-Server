@@ -9,7 +9,7 @@ class Mutations::UpdateUser < Mutations::BaseMutation
            user.name = attributes[:name]
          else attributes[:email]
            user.email = attributes[:email]
-         end
+      end
 
        user.save!
        user

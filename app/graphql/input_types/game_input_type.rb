@@ -1,10 +1,10 @@
 module InputTypes
-  class UserInputType < InputTypes::Base
+  class GameInputType < InputTypes::Base
 
-    argument :id, Integer,description: "Game ID", required: false
-    argument :name,description: "Game name", String, required: false
-    argument :genre,description: "Game genre", String, required: false
-    argument :platform,description: "Game platform", String, required: false
+    argument :id, ID,description: "Game ID", required: true
+    argument :name, String,description: "Game name", required: false
+    argument :genre, String,description: "Game genre", required: false
+    argument :platform, String,description: "Game platform", required: false
 
 
   end
