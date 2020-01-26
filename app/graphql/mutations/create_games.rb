@@ -6,6 +6,11 @@ class Mutations::CreateGames < Mutations::BaseMutation
 
 
   def resolve(attributes:)
-    game = Game.create!(attributes.to_h)
+    if Game.find(attributes[:id])
+      Game.find(attributes[:id]).update!.(attributes.to_h)
+      Game.find(attributes[:id])
+    else
+      Game.create!(attributes.to_h)
+    end
   end
 end

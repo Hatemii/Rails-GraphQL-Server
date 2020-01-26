@@ -6,6 +6,11 @@ class Mutations::CreateUser < Mutations::BaseMutation
 
 
   def resolve(attributes:)
-    user = User.create!(attributes.to_h)
+    if User.find(attributes[:id])
+      User.find(attributes[:id]).update!(attributes.to_h)
+      User.find(attributes[:id])
+    else
+      User.create!(attributes.to_h)
+    end
   end
 end

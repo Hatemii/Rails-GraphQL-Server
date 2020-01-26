@@ -6,6 +6,12 @@ class Mutations::CreateBook < Mutations::BaseMutation
 
 
   def resolve(attributes:)
-    book = Book.create!(attributes.to_h)
+
+    if Book.find(attributes[:id])
+      Book.find(attributes[:id]).update!(attributes.to_h)
+      Book.find(attributes[:id])
+    else
+        Book.create!(attributes.to_h)
+      end
+    end
   end
-end
