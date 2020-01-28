@@ -3,13 +3,12 @@
 class Mutations::CreateBook < Mutations::BaseMutation
 
   argument :attributes, InputTypes::BookInputType, required: true
+  argument :id, ID, required: false
 
-
-  def resolve(attributes:)
-
-    if Book.find(attributes[:id])
-      Book.find(attributes[:id]).update!(attributes.to_h)
-      Book.find(attributes[:id])
+  def resolve(id:nil,attributes:)
+    if id
+      Book.find(id).update!(attributes.to_h)
+      Book.find(id)
     else
         Book.create!(attributes.to_h)
       end
