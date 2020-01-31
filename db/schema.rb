@@ -16,8 +16,10 @@ ActiveRecord::Schema.define(version: 2020_01_17_123702) do
     t.string "title"
     t.string "author"
     t.string "genre"
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -44,5 +46,6 @@ ActiveRecord::Schema.define(version: 2020_01_17_123702) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "books", "users"
   add_foreign_key "posts", "users"
 end
