@@ -8,6 +8,8 @@ module Queries
     def resolve(id: nil)
       if id
         ::Game.where(id: id)
+      elsif
+        ::Game.all.order("id")
       else
         ::Game.all
       end
