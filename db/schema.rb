@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_082133) do
+ActiveRecord::Schema.define(version: 2020_05_05_083435) do
 
   create_table "groups", force: :cascade do |t|
     t.string "purchase_spread"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2020_05_05_082133) do
   create_table "spreads", force: :cascade do |t|
     t.string "sale_spread"
     t.string "currency"
-    t.integer "user_id", null: false
-    t.integer "group_id", null: false
+    t.integer "user_id"
+    t.integer "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_spreads_on_group_id"
@@ -34,8 +34,11 @@ ActiveRecord::Schema.define(version: 2020_05_05_082133) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_users_on_group_id"
   end
 
   add_foreign_key "spreads", "groups"
   add_foreign_key "spreads", "users"
+  add_foreign_key "users", "groups"
 end
