@@ -9,7 +9,7 @@ module Queries
       if id
         ::Group.where(id: id)
       else
-        ::Group.all
+        ::Group.all.order("id ASC")
       end
     end
 
