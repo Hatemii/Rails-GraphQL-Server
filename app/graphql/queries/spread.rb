@@ -19,7 +19,8 @@ module Queries
         if currencies - user_exceptional_currencies == []
           ::User.find(user_id).spreads.all.order("id ASC")
         else
-          raise GraphQL::ExecutionError, "User does not contain all currency spreads [check currencies in array]"
+          raise GraphQL::ExecutionError, "User with id #{user_id} has only #{::User.find(user_id).spreads.pluck(:currency)} , check currencies for more"
+
         end
 
       elsif group_id
