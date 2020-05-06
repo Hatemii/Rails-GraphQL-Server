@@ -20,7 +20,6 @@ module Queries
           ::User.find(user_id).spreads.all.order("id ASC")
         else
           raise GraphQL::ExecutionError, "User with id #{user_id} has only #{::User.find(user_id).spreads.pluck(:currency)} , check currencies for more"
-
         end
 
       elsif group_id
