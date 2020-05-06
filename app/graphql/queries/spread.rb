@@ -9,17 +9,29 @@ module Queries
 
 
     def resolve(spread_id: nil,user_id:nil,group_id:nil)
+      currencies = ["EUR","GBP","ALB","USD","CHF"]
+
       if spread_id
         ::Spread.where(spread_id: spread_id)
 
       elsif user_id
-        ::User.find(user_id).spreads.all.order("id ASC")
+        user_exceptional_currencies = ::User.find(user_id).spreads.pluck(:currency)
+        if currencies - user_exceptional_currencies == []
+          ::User.find(user_id).spreads.all.order("id ASC")
+        else
+          raise GraphQL::ExecutionError, "User does not contain all currency spreads [check currencies in array]"
+        end
 
       elsif group_id
         ::Group.find(group_id).spreads.all.order("id ASC")
+
       else
         ::Spread.all.where(spreadable_id:nil,spreadable_type:nil).order("id ASC")
+
       end
     end
   end
 end
+
+# example
+#[1,2,3,4,5] - [1,3,4] == [2,5]
