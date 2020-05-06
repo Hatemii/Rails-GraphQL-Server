@@ -18,7 +18,7 @@ module Queries
       elsif group_id
         ::Group.find(group_id).spreads.all.order("id ASC")
       else
-        ::Spread.all.order("id ASC")
+        ::Spread.all.where(spreadable_id:nil,spreadable_type:nil).order("id ASC")
       end
     end
   end
