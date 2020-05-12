@@ -4,10 +4,12 @@ module Types
 
     field :create_user, OutputTypes::UserType, mutation: Mutations::CreateUser
     field :create_games,OutputTypes::GameType, mutation: Mutations::CreateGames
-    field :create_book, OutputTypes::BookType, mutation: Mutations::CreateBook
+    field :create_books, OutputTypes::BookType, mutation: Mutations::CreateBook
+
 
     field :create_spread, OutputTypes::SpreadType, mutation: Mutations::CreateSpread
     field :create_group, OutputTypes::GroupType, mutation: Mutations::CreateGroup
+    field :create_bank_accounts, OutputTypes::BankAccountType, mutation: Mutations::CreateBankAccount
 
 
     field :delete_user, OutputTypes::UserType, mutation: Mutations::DeleteUser

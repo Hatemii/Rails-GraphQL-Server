@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_103917) do
+ActiveRecord::Schema.define(version: 2020_05_12_194154) do
+
+  create_table "bank_accounts", force: :cascade do |t|
+    t.string "currency"
+    t.string "iban"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "groups", force: :cascade do |t|
+    t.string "purchase_spread"
+    t.string "sale_spread"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -22,8 +31,6 @@ ActiveRecord::Schema.define(version: 2020_05_06_103917) do
     t.integer "spreadable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "currency"
-    t.string "sale_spread"
     t.index ["spreadable_type", "spreadable_id"], name: "index_spreads_on_spreadable_type_and_spreadable_id"
   end
 

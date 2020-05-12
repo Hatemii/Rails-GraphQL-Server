@@ -1,5 +1,3 @@
-
-
 class Mutations::CreateBook < Mutations::BaseMutation
 
   argument :attributes, InputTypes::BookInputType, required: true
