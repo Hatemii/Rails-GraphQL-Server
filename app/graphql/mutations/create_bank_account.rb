@@ -4,9 +4,9 @@ class Mutations::CreateBankAccount < Mutations::BaseMutation
   argument :id,ID,required: false
 
   def resolve(id:nil,attributes:)
-    if id
-      BankAccount.find(id).update!(attributes.to_h)
-      BankAccount.find(id)
+
+    if BankAccount.where(currency:attributes[:currency]).where('DATE(created_at) = ?', Date.today).any?
+      BankAccount.where(currency:attributes[:currency]).last.update!(attributes.to_h)
     else
       if attributes.iban.to_i < 100
         raise GraphQL::ExecutionError, "You dont have enough balance to complete this"
@@ -14,5 +14,7 @@ class Mutations::CreateBankAccount < Mutations::BaseMutation
         BankAccount.create!(attributes.to_h)
       end
     end
+    BankAccount.where(currency:attributes[:currency]).last
+
   end
 end
