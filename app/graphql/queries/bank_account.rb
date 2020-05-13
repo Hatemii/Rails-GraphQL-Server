@@ -1,15 +1,15 @@
 module Queries
   class BankAccount < Queries::BaseQuery
 
-     argument :id, ID, required: false
      type [OutputTypes::BankAccountType], null: false
+     argument :user_id, ID, required: false
 
 
-    def resolve(id: nil)
-      if id
-        ::BankAccount.where(id: id)
+    def resolve(user_id: nil)
+      if user_id
+        ::User.find(user_id).bank_accounts
       else
-        ::BankAccount.all
+        ::BankAccount.where(user_id:nil)
       end
     end
 

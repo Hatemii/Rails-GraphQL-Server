@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_194154) do
+ActiveRecord::Schema.define(version: 2020_05_12_203827) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "currency"
     t.string "iban"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_bank_accounts_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -42,5 +44,6 @@ ActiveRecord::Schema.define(version: 2020_05_12_194154) do
     t.index ["group_id"], name: "index_users_on_group_id"
   end
 
+  add_foreign_key "bank_accounts", "users"
   add_foreign_key "users", "groups"
 end

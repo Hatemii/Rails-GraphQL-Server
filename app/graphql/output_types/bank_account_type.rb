@@ -4,6 +4,6 @@ module OutputTypes
     field :id, ID,null: false
     field :currency, String,null: true
     field :iban, String,null: true
-
+  
   end
 end
