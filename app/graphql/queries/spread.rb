@@ -1,37 +1,40 @@
 module Queries
   class Spread < Queries::BaseQuery
 
-     type [OutputTypes::SpreadType], null: false
+    type [OutputTypes::SpreadType], null: false
 
-     argument :spread_id, ID, required: false
-     argument :user_id, ID, required: false
-     argument :group_id, ID, required: false
+    argument :spread_id, ID, required: false
+    argument :user_id, ID, required: false
 
+    def resolve(spread_id: nil,user_id:nil)
+      
+      currencies = ["EUR","GBP","USD","CHF","ALB","DENAR","KRUNA"]
 
-    def resolve(spread_id: nil,user_id:nil,group_id:nil)
-      currencies = ["EUR","GBP","ALB","USD","CHF"]
+      if user_id
+        user_currency = ::User.find(user_id).spreads.pluck(:currency)
 
-      if spread_id
-        ::Spread.where(spread_id: spread_id)
+        if currencies - user_currency == []
+          ::User.find(user_id).spreads.order("id ASC")
 
-      elsif user_id
-        user_exceptional_currencies = ::User.find(user_id).spreads.pluck(:currency)
-        if currencies - user_exceptional_currencies == []
-          ::User.find(user_id).spreads.all.order("id ASC")
         else
-          raise GraphQL::ExecutionError, "User with id #{user_id} has only #{::User.find(user_id).spreads.pluck(:currency)} , check currencies for more"
+          left_currency = currencies - user_currency
+          default_spread = ::Spread.where(spreadable_id:nil, spreadable_type:nil, currency:left_currency)
+          user_spread = ::User.find(user_id).spreads
+          user_spread.or(default_spread).order("id ASC")
         end
 
-      elsif group_id
-        ::Group.find(group_id).spreads.all.order("id ASC")
-
       else
-        ::Spread.all.where(spreadable_id:nil,spreadable_type:nil).order("id ASC")
-
+        ::Spread.where(spreadable_id:nil,spreadable_type:nil).order("id ASC")
       end
+
     end
   end
 end
 
-# example
-#[1,2,3,4,5] - [1,3,4] == [2,5]
+
+# The query first will check for users_spread (user 1 may have only "USD","EUR") .. if there
+# are currencies that user doesn't have from here ["EUR","GBP","USD","CHF","ALB","DENAR","KRUNA"]
+# with this method -> "currencies - user_currency == []"
+# else we will find where this other currencies belongs to
+# and then we will return "user_spread.or(default_spread).order("id ASC")"
+# both users_spread and other spread together
