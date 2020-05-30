@@ -27,7 +27,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'awesome_print', '~> 1.8'
 gem 'table_print', '~> 1.5', '>= 1.5.6'
-
+gem "activesupport", ">= 6.0.3.1"
 
 
 group :development, :test do

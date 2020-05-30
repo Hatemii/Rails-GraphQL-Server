@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_203827) do
+ActiveRecord::Schema.define(version: 2020_05_15_080128) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "currency"
