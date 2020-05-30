@@ -7,7 +7,7 @@ module Queries
 
     def resolve(user_id: nil)
       if user_id
-        ::BankAccount.where(user_id: user_id)
+        ::BankAccount.where(user_id: user_id).order("id DESC")
       else
         ::BankAccount.where(user_id: nil)
       end
