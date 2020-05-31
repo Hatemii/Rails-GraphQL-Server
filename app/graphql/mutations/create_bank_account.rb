@@ -13,10 +13,10 @@ class Mutations::CreateBankAccount < Mutations::BaseMutation
       user = User.find(user_id)
 
       bank_account_object.each do |bank_account|
-        user.bank_accounts.build(
+        user.bank_accounts.where(
           currency: bank_account["currency"],
-          iban: bank_account["iban"]
-        )
+        ).first_or_create.update(iban: bank_account["iban"])
+
         user.save
       end
 
