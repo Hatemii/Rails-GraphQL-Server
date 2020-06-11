@@ -10,6 +10,7 @@ module Types
     field :create_spread, OutputTypes::SpreadType, mutation: Mutations::CreateSpread
     field :create_group, OutputTypes::GroupType, mutation: Mutations::CreateGroup
     field :create_bank_accounts, OutputTypes::BankAccountType, mutation: Mutations::CreateBankAccount
+    field :create_limits, OutputTypes::LimitType, mutation: Mutations::CreateLimit
 
 
     field :delete_user, OutputTypes::UserType, mutation: Mutations::DeleteUser

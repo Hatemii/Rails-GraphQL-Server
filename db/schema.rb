@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_215714) do
+ActiveRecord::Schema.define(version: 2020_06_11_162602) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "currency"
@@ -24,6 +24,12 @@ ActiveRecord::Schema.define(version: 2020_05_30_215714) do
   create_table "groups", force: :cascade do |t|
     t.string "purchase_spread"
     t.string "sale_spread"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "limits", force: :cascade do |t|
+    t.string "limit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -43,6 +49,8 @@ ActiveRecord::Schema.define(version: 2020_05_30_215714) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "group_id"
+    t.string "trading_limit"
+    t.string "limit_exception"
     t.index ["group_id"], name: "index_users_on_group_id"
   end
 

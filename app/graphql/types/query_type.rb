@@ -9,6 +9,8 @@ module Types
 
      field :spreads, resolver: Queries::Spread
      field :groups, resolver: Queries::Group
+     field :limits, resolver: Queries::Limit
+
 
 
 
