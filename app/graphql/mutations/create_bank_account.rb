@@ -1,24 +1,19 @@
 class Mutations::CreateBankAccount < Mutations::BaseMutation
 
-  argument :attributes, InputTypes::BankAccountInputType, required: true
-  argument :bank_id,ID,required:false
+  argument :attributes, InputTypes::BankAccountInputType, required: false
+  argument :bank_id, ID, required: false
 
-  def resolve(attributes:attributes,bank_id:nil)
-
+  def resolve(attributes: attributes, bank_id: bank_id)
     if bank_id
       bank = BankAccount.find(bank_id)
       bank_currency = bank.currency
 
-      find_true = BankAccount.where(currency:attributes.currency).where(primary:true).any?
+      find_true = BankAccount.where(currency:attributes.currency, primary:true).where.not(id: bank_id).any?
 
       if find_true == true && attributes.primary == true
-        if bank.primary == true
-          raise GraphQL::ExecutionError, "primary is already true"
-        else
+        current_primary = BankAccount.where(currency:bank_currency, primary:true)
+        current_primary.update(primary:false)
 
-          current_primary = BankAccount.where(currency:bank_currency).where(primary:true)
-          current_primary.update(primary:false)
-        end
       end
 
       bank.update!(attributes.to_h)
@@ -26,16 +21,24 @@ class Mutations::CreateBankAccount < Mutations::BaseMutation
       bank
 
     else
-      find_true = BankAccount.where(currency:attributes.currency).where(primary:true).any?
+      find_true = BankAccount.where(currency:attributes.currency, primary:true).any?
 
       if find_true == true && attributes.primary == true
-        current_primary = BankAccount.where(currency:attributes.currency).where(primary:true)
+        current_primary = BankAccount.where(currency:attributes.currency, primary:true)
         current_primary.update(primary:false)
 
         BankAccount.create!(attributes.to_h)
 
       else
-        BankAccount.create!(attributes.to_h)
+        if BankAccount.where(currency:attributes.currency).empty?
+          BankAccount.create!(attributes.to_h).update!(primary:true)
+
+        else
+          BankAccount.create!(attributes.to_h)
+
+        end
+
+        BankAccount.where(currency:attributes.currency).last
 
       end
     end
