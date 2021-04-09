@@ -4,7 +4,7 @@ module Types
      field :users, resolver: Queries::User
      field :books, resolver: Queries::Book
      field :games, resolver: Queries::Game
-     field :bank_accounts, resolver: Queries::BankAccount
+     field :banks, resolver: Queries::BankAccount
 
 
      field :spreads, resolver: Queries::Spread

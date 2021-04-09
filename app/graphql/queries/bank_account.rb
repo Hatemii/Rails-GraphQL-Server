@@ -1,22 +1,10 @@
-module Queries::MyProfile
-  class Payments < Queries::BaseQuery
+module Queries
+  class BankAccount < Queries::BaseQuery
 
-    type OutputTypes::BankAccountDetailType, null: true
+    type [OutputTypes::BankAccountType], null: true
 
     def resolve
-      user = context[:current_user]
-      user_bank_accounts = Pundit::policy_scope(user, ::BankAccount.all)
-
-
-      payments = []
-      ENABLED_CURRENCY_TRADER_CURRENCIES.each do |currency|
-        bank_accounts = user_bank_accounts.where(currency:currency).select("id", "iban", "primary")
-        payments.push({currency: currency, bank_accounts: bank_accounts})
-      end
-
-      {
-          bank_accounts: payments
-      }
+      ::BankAccount.all.order("ID DESC")
 
     end
   end
